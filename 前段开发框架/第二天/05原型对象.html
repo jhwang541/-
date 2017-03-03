@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+
+        .mainColor {
+            color: #122b34;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+<script>
+    var obj = {
+        name : '赵远杰',
+        age : 21,
+        wife : {
+            name : '如花',
+            age : 22
+        },
+        son : {
+            name : '小杰',
+            age : 1
+        }
+
+    };
+
+
+    //__proto__实例一般有这个方法
+    console.log(Function.__proto__ == Object.prototype);//  false
+    //Function继承自Object
+    console.log(Function.prototype.__proto__ == Object.prototype);//  true
+
+    console.log(Object.prototype.__proto__);//null
+
+
+
+
+    function Person() {
+        this.name = 'awda';
+        this.shit = function () {
+            console.log('你要吃屎');
+        }
+
+    }
+
+    Person.prototype = {
+        shit :  function () {
+            console.log('需要排毒');
+        }
+    };
+
+
+    var p = new Person();
+    //属性屏蔽
+    delete  p.shit;
+    p.shit();
+    console.log(p);
+
+    delete p.__proto__.shit;
+
+
+    var p2 = new Person();
+    p2.__proto__.shit();
+    console.log(p2);
+
+    //    p.__proto__.shit();
+    //    Person.prototype.shit();
+
+
+
+    //    var i = 0;
+    //    while (i < 10){
+    //        new Person();
+    //        i++;
+    //    }
+
+    //执行环境
+
+    //'use strict';
+
+    var key  = '12345';
+
+    function fn() {
+//       key = 'keykey';
+
+        //var key = '54321';
+
+        console.log(key);
+    }
+    fn();
+    console.log(key);
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="p">
+    <h1 id='pname'></h1>
+    <p id="price"></p>
+    <p id="discount"></p>
+    <p id="discount_price"></p>
+</div>
+<script src="jquery-3.1.0.min.js"></script>
+<script>
+
+    //构造函数
+    function Product() {
+        this.pname = '';
+        this.price = 0;
+        this.discount = 0;
+        this.discount_price = 0;
+        Object.defineProperty(this, 'discount_price', {
+            //取值方法(取值器)
+            get : function () {
+                return this.price * this.discount / 10;
+            },
+            //设值方法(设置器)
+            set : function (value) {
+                //我们可以在设置里面做一些判断
+                if(value > 10000 || value <= 0){
+                    alert('请保持价格在0-10000之间');
+                }else {
+                    console.log('价格ok');
+                }
+            }
+
+        });
+        Object.defineProperty(this, 'price', {
+            value : 3000,
+            writable : false//不可写, 就是这个值不会被改变
+        });
+
+
+    }
+    //设置原型对象
+    Product.prototype = {
+        bindDom : function () {
+            $('#pname').html(this.pname);
+            $('#price').html('价格：' + this.price);
+            $('#discount').html('折扣：' + this.discount);
+            $('#discount_price').html('折扣价：' + this.discount_price);
+
+        }
+    };
+
+    //创建实例化对象
+    var p = new Product();
+    p.pname = '乐视 TV X3-55 PRO';
+    p.price = 2000;
+    p.discount = 8.0;
+    //p.discount_price = 54000;
+    p.bindDom();
+</script>
+</body>
+</html>

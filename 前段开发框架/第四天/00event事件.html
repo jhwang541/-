@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>event</title>
+    <style>
+
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+
+<div id="box"></div>
+
+
+<ul>
+    <li>item1</li>
+    <li>item2</li>
+    <li>item3</li>
+    <li>item4</li>
+    <li>item5</li>
+</ul>
+
+<script src="web106.js"></script>
+
+<script>
+
+
+    //event事件对象， 包含事件的状态：触发事件的元素， 鼠标的位置和状态， 按下的键， event事件只在事件发生时才会存在
+
+
+    var box = $$.$id('box');
+    box.onclick = function (event) {
+        //console.log(event);
+        //window.event   ie
+       // event = event || window.event;
+
+        event = getEvent(event);
+        var target = getTarget(event);
+        console.log(target);
+
+    };
+
+
+    document.onkeyup = function (e) {
+        //console.log(e);
+        console.log(e.key);
+
+        console.log(e.keyCode);
+
+    };
+    function getEvent(e) {
+        return e || window.event;
+    }
+
+    //获取事件目标
+    function getTarget(e) {
+        e = getEvent(e);
+        //srcElement 这是ie   或者：也叫作短路表达式
+        return e.target || e.srcElement;
+    }
+
+
+
+    var lis = $$.$tag('li');
+    for(var i=0, len=lis.length; i<len; i++){
+        lis[i].onclick = function (e) {
+            e = getEvent(e);
+            console.log(getTarget(e));
+            //console.log(i);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

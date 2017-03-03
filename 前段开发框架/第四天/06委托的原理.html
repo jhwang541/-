@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<button id="btn">add</button>
+
+<ul id="container">
+    <li class="item">item1</li>
+    <li class="item">item2</li>
+    <li class="item">item3</li>
+    <li class="item">item4</li>
+    <li class="item">item5</li>
+    <li class="item">item6</li>
+</ul>
+
+
+<script src="./web106.js"></script>
+
+<script>
+
+
+    //pid : parent id
+    //selector 选择父元素里面的子元素
+    // fn   回掉函数
+    function delegate(pid, eventType, selector, fn) {
+
+        var parent = document.getElementById(pid);
+
+        function handle(e) {
+            e = $$.getEvent(e);
+            //捕获目标
+            var target = $$.getTarget(e);
+            console.log(target);
+            /*
+             nodeName:如果是一个元素节点， 就返回标签名， 如果是属性节点 则返回属性的名字，
+            */
+            //target.nodeName.toLowerCase() === selector判断标签选择器
+            if(target.nodeName.toLowerCase() === selector || target.id === selector ||target.className.indexOf(selector) != -1){
+                //call使用target调用fn， 改变fn里面this的指向，
+                fn.call(target);
+            }
+
+        }
+
+        //这边需要给度元素添加事件: 执行顺序： 先捕获到目标， 然后事件给目标实现
+        parent['on' + eventType] = handle;
+    }
+
+
+    var btn = document.getElementById("btn");
+    var container = document.getElementById("container");
+    btn.onclick = function () {
+        var li = document.createElement('li');
+        li.innerHTML = '我是新增加的元素';
+        li.className = 'item';
+        container.appendChild(li);
+        //fn();
+    };
+
+
+
+
+
+    delegate('container', 'click', 'item', function () {
+        console.log(this);
+        this.style.backgroundColor = 'green';
+    })
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

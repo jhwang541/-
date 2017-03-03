@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<script>
+
+    //1.var 私有属性  可以减少对外公开的内容， 统一管理一些属性
+    function Person() {
+        this.name = '赵远杰迟到了';
+        var name = '赵远杰走开';//私有属性， 属于构造函数私有
+        //可以减少对外公开的内容， 统一管理一些属性
+        this.config = {
+            name : name,
+            age : 20,
+            price : 5388,
+            zhekou : -1
+        }
+    }
+
+    var p = new Person();
+
+    //2.p.constructor = Person;隐式调用
+
+    console.log(p.config.name, p.config.price);
+
+    var xdyuan;//js是动态语言， 变量类型是在runtime阶段判断的
+    console.log(typeof undefined);//undefined
+    console.log(typeof null);//object 空对象
+    console.log(typeof true);//boolean
+    console.log(typeof 123);//number
+    console.log(typeof '123');//string
+    console.log(typeof function () {}); //function
+    console.log(typeof {});//object
+    console.log(typeof []);//object
+    console.log(typeof xdyuan);//undefined
+
+    //3.函数的tostring 配合(call apply)
+    //console.log(Object.prototype);
+    console.log(Object.prototype.toString.call(123));//"[object Number]"
+
+    var num = 1234;
+    if(Object.prototype.toString.call(num) == '[object Number]'){
+        console.log('我是一个数字');
+    }
+
+    console.log(toString.call({}));//[object Object]
+    console.log(toString.call([]));//[object Array]
+    console.log(toString.apply([1, 2, 3]));
+
+    var array = [];
+    console.log(array.constructor == Array);//true
+    var obj4 = {};
+    console.log(obj4.constructor == Object);//true
+</script>
+</body>
+</html>

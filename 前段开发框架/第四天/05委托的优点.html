@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>委托</title>
+</head>
+<body>
+
+
+<ul id="container">
+    <li>下雨了</li>
+    <li>下雨了</li>
+    <li>下雨了</li>
+    <li>下雨了</li>
+    <li>下雨了</li>
+    <li>下雨了</li>
+</ul>
+
+
+<button id="btn">新添加一个元素</button>
+
+
+<script src="./jquery.js"></script>
+<script>
+
+
+    var lis = document.getElementsByTagName('li');
+    /*function fn() {
+        var lis = document.getElementsByTagName('li');
+        for(var i=0, len=lis.length; i<len; i++){
+            lis[i].onclick = function () {
+                this.style.backgroundColor = 'red';
+            }
+        }
+    }
+    fn();
+    */
+
+    var btn = document.getElementById("btn");
+    var container = document.getElementById("container");
+    btn.onclick = function () {
+        var li = document.createElement('li');
+        li.innerHTML = '我是新增加的元素';
+        container.appendChild(li);
+        //fn();
+    };
+
+
+//    $('#container').delegate('li', 'click', function () {
+//        this.style.backgroundColor = 'red';
+//    })
+    //说明使用jquery添加事件， 仍然不可以给新增加的元素添加事件
+    $('li').each(function (index, ele) {
+       //console.log(this == ele);//true
+        //console.log(ele==lis[index]);
+        $(this).click(function () {
+           $(this).css('backgroundColor', 'red');
+        });
+
+
+        //ele DOM对象那个
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
