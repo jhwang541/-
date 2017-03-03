@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1 id="msg"></h1>
+<button id="btn">登录</button>
+<script src="检测.js"></script>
+<script>
+    var btn = $$.$id('btn');
+    var msg = $$.$id('msg');
+//        btn.onclick = function () {
+//            var user = {name : 'xdyuan'};
+//            msg.innerHTML = '欢迎'+user.name+'来到德莱联盟';
+//        }
+
+    function formateString(str, data) {
+        //function回调函数的参数：第一个参数是匹配成功的完整字符串， 第二个括号中的值
+        return str.replace(/@\((\w+)\)/g, function (match, key1) {
+            console.log(match);
+            console.log(key1);
+            //return的是返回值
+            return typeof data[key1] == 'undefined' ? '' : data[key1];
+        })
+    }
+
+
+
+    function capitalize(str){
+        return str.replace( /(^|\s|[,.。])([a-z])/g , function(m,p1,p2){
+            return p1+p2.toUpperCase();
+        } );
+    }
+
+
+    console.log(capitalize('this ,is 。a .string ,hello  , world'));
+    btn.onclick = function () {
+        var user = {name : 'xdyuan'};
+        // msg.innerHTML = '欢迎@(name)来到德莱联盟';
+        msg.innerHTML = formateString('欢迎@(name)来到德莱联盟', user);
+
+    }
+
+
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

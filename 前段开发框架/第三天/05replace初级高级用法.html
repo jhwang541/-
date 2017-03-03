@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>replace用法</title>
+</head>
+<body>
+<script>
+    /****************** replace基本用法*****************/
+    var myString = 'javascript is a good script language, A, A';
+    //基础用法         简化写法     正则表达式写法
+    console.log(myString.replace('a', 'A'));
+    //  /g表示匹配所有成功的内容   i区分大小写
+    console.log(myString.replace(/a/gi, 'B'));
+    console.log(myString.replace(new RegExp('a', 'gm'), 'A'));
+
+
+    /************* replace高级用法   特殊标记符 $  ********/
+    myString = 'javascript is a good script language';
+    //匹配后替换  javascript is fun, it is a good script language
+    //$i（i:1-99）表示正则从左到右匹配的文本， 尤其是括号里面的内容
+    console.log(myString.replace(/(javascript)\s*(is)/, '$1 $2 fun, i t $2'));
+    //javascript is fun, it is  --替换--> javascript is
+    //$1====javascript  $2===is
+
+    myString = 'wuxian    edu';// edu wuxian
+    console.log(myString.replace(/(\w+)\s+(\w+)/, '$2 & $1'));
+
+
+
+
+
+
+    // $&匹配的全文本
+    myString = 'girl';
+    console.log(myString.replace(/\w+/, '$&-$&'));//girl-girl
+
+
+    //$`  tab上面的那个键   表示匹配文本左边文本
+    myString = 'javascript';
+    console.log(myString.replace(/(script)/, '$& != $`')); //javascript != java
+
+    //$'(单引号)  tab上面的那个键   表示匹配文本左边文本
+
+    myString = 'javascript';
+    console.log(myString.replace(/(java)/, "$'"));//scriptscript
+
+
+    /*
+     * replace高级用法   回掉函数
+     *
+     * */
+
+
+    myString = 'xyzbababc';
+    myString.replace(/(a)(b)/g, function (key1, key2, key3, key4, key5, key6) {
+        console.log(key1, key2, key3, key4, key5, key6);
+    });//ab a b 1 babac undefined
+    /*
+    * 参数的意思：
+    * 第一个参数：整个正则表达式匹配的字符串
+    * 2、第一分组匹配的内容， 第二分组匹配的内容， 依次类推， 知道没有分组匹配
+    * 3、下一个参数：表示匹配在源字符串中的下标
+    * 4、最后一个参数是源字符串
+    */
+
+    //单词首字母大写
+    myString = 'javascript is a good script language';
+
+    var ret = myString.replace(/\b\w+\b/g, function (word) {
+       return word.substring(0, 1).toUpperCase() + word.substring(1);
+    });
+    console.log("ret = "+ret);
+
+
+
+    function capitalize(str){
+        return str.replace( /(^|\s)([a-z])/g , function(m,p1,p2){
+            return p1+p2.toUpperCase();
+        } );
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>框架</title>
+</head>
+<body>
+<ul>
+    <li>item1</li>
+    <li>item2</li>
+    <li>item3</li>
+    <li>item4</li>
+    <li>item5</li>
+</ul>
+<!--表单验证是否为空， 合法， 字符串前后空格的剔除-->
+<label>
+    用户名：
+    <input id="username" type="text">
+</label>
+<button id="submit">提交</button>
+
+<script>
+    var $ = function () {
+
+    };
+    $.prototype = {
+        $id : function (id) {
+            return document.getElementById(id);
+        },
+        $tag : function (tag) {
+            return document.getElementsByTagName(tag);
+        }
+    };
+
+    //去除前后的空格
+    $.prototype.ltrim = function (str) {
+        var reg = /(^\s*)/g;
+        //var reg = new RegExp('(^\\s*)', 'g');
+        return str.replace(reg, '');//替换掉匹配的内容
+    };
+    //去除前面的空格
+    $.prototype.rtrim = function (str) {
+        var reg = /(\s*$)/g;
+        return str.replace(reg, '');//替换掉匹配的内容
+    };
+    //前后二者整合
+    $.prototype.trim = function (str) {
+        var reg = /(^\s*)|(\s*$)/g;
+        return str.replace(reg, '');//替换掉匹配的内容
+    };
+    //检查输入不等于空(直接返回不为空)
+    $.prototype.checkNull = function (input) {
+//        if(input != ''){
+//            return true;
+//        }else {
+//            return false;
+//        }
+
+        //return input!='' ? true : false;
+        return input != '';
+    };
+    //检查输入不为空(长度为不能为0)
+    $.prototype.checkNull = function (input) {
+        return input.length != 0;
+    };
+    $.prototype.checkNum = function (input) {
+        //检测数字
+        var reg = /^[0-9]{5,12}$/g;
+        //返回匹配的数字   match()  和 test()
+        return input.match(reg);
+    };
+
+
+    //创建实例
+    jQuery = $ = new $();
+    var username = $.$id('username');
+    var submit = $.$id('submit');
+    submit.addEventListener('click', function () {
+
+        //做一些提交之前的检测， 数据是否安全，
+        var input = username.value;
+        input = $.trim(input);
+        console.log($.checkNull(input));
+        if(!$.checkNull(input)){
+            alert('用户名不能为空');
+            username.value = '';
+        }else {
+            //ajax数据提交登录
+            console.log('登录成功');
+        }
+
+    });
+    var number = '3123123';
+    //Array  null
+    console.log($.checkNum(number));//返回匹配成功的字符串
+    var lis = $.$tag('li');
+    console.log(lis);
+
+
+
+    var str = '      this        ';
+    console.log(str);
+    console.log($.ltrim(str));//可以输出字符串长度来检测
+    console.log($.rtrim(str));
+    console.log($.trim(str).length);
+
+
+
+
+    /*^同类*/
+    //    ^	    匹配输入字符串的开始位置。
+    //    $	    匹配输入字符串的结束位置。
+    //   \b     匹配一个单词边界，也就是指单词和空格间的位置。
+    //          例如， 'er\b' 可以匹配"never" 中的'er'，但不能匹配 "verb" 中的 'er'。
+    //    \B	和\b相反，匹配非单词边界。
+    //          'er\B' 能匹配 "verb" 中的 'er'，但不能匹配 "never" 中的 'er'。
+
+
+
+    /*补充 g同类 -- i 表示不区分大小写
+     比如：/a/i，表示“a”或“A”都是满足条件的*/
+
+
+
+    /**同类*/
+    //星号(*): 星号代表匹配它前面一个字符任意遍(0或任意次)
+    //加号(+): 表示匹配前面的字符一次或多次（至少一次).
+    //问号(?): 问号也是一个数量词，它代表匹配前一个字符0或1次。
+
+    //中括号[]： 中括号用来表示一个字符集合，
+    //如果这个集合有很多元素，如26个字母，数字等，一个个地写在中括号里，未免太麻烦太蠢笨，
+    //这时可以用连字符(hyphen)来表示一个范围，
+    // 如:[a-z]表示小写字母的集合，
+    // [a-zA-Z]表示大小写字母的集合。 [0-9]
+    // 脱字符^ (caret).
+    // 这种写法表示，匹配任何不在该集合中的字符，与上面的用法刚好相反
+
+    //    大括号:{}
+    //    大括号的作用是指定重复前面一个字符多少遍:
+    //    {N} 重复N遍
+    //    {n,m} 重复 n~m 遍
+    //    {n,}  至少重复n遍
+    //    {,m} 至多重复m遍
+
+    /*\s同类*/
+    //    \w -- (小写w) 表示字母或数字，等价于 [a-zA-Z0-9]
+    //    \W -- (大写W)非字母且非数字，与\w相反 等价于 '[^A-Za-z0-9_]'
+    //    \s  --  (小写s)匹配一个空格字符，包括：空格，换行，回车,tab,等价于[ \n\r\t\f]   \f
+    //    \S --  (大写S)匹配非空格字符，\s的相反 等价于 [^ \f\n\r\t\v]。
+    //    \d -- 表示10进制数字，等价于 [0-9]
+    //    \D --	匹配一个非数字字符。等价于 [^0-9]。
+</script>
+</body>
+</html>

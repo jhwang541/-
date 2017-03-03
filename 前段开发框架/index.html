@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+        <img src="" alt="" >
+        <p id="zhekou"></p>
+        <span id="price"></span>
+        <span id="shouliang"></span>
+</div>
+<div>
+    <img src="" alt="" >
+    <p id="zhekou"></p>
+    <span id="price"></span>
+    <span id="shouliang"></span>
+</div>
+<div>
+    <img src="" alt="" >
+    <p id="zhekou"></p>
+    <span id="price"></span>
+    <span id="shouliang"></span>
+</div>
+<div>
+    <img src="" alt="" >
+    <p id="zhekou"></p>
+    <span id="price"></span>
+    <span id="shouliang"></span>
+</div>
+<div>
+    <img src="" alt="" >
+    <p id="zhekou"></p>
+    <span id="price"></span>
+    <span id="shouliang"></span>
+</div>
+<div>
+    <img src="" alt="" >
+    <p id="zhekou"></p>
+    <span id="price"></span>
+    <span id="shouliang"></span>
+</div>
+<script src="jquery-3.1.0.js"></script>
+<script>
+
+   var arry= [
+        {
+
+            bg:"img/boutque01_r2_c2.jpg",
+            zhekou:"3.5折/玉兰油",
+            price:"$1120",
+            shouliang:"售量:300"
+        },
+        {
+            bg:"img/boutque02_r2_c2.jpg",
+            zhekou:"3.5折/玉兰油",
+            price:"$1120",
+            shouliang:"售量:3000"
+        },
+        {
+            bg:"img/boutque03_r2_c2.jpg",
+            zhekou:"3.5折/玉兰油",
+            price:"$1140",
+            shouliang:"售量:200"
+        },
+        {
+            bg:"img/boutque04_r2_c2.jpg",
+            zhekou:"3折/玉兰油",
+            price:"$1140",
+            shouliang:"售量:5500"
+        },
+        {
+            bg:"img/boutque05_r2_c2.jpg",
+            zhekou:"3折/玉兰油",
+            price:"$1140",
+            shouliang:"售量:5500"
+        },
+        {
+            bg:"img/boutque06_r2_c2.jpg",
+            zhekou:"3折/玉兰油",
+            price:"$1140",
+            shouliang:"售量:5500"
+        }
+    ];
+   function Product(option) {
+       this._init(option);
+   }
+   Product.prototype = {
+       _init : function (option) {
+           this.bg = option.bg;
+           this.zhekou = option.zhekou;
+           this.price = option.price;
+           this.shouliang = option.shouliang;
+       }
+   };
+
+
+//   var ip7 = new Product({
+//       title : 'iPhone7',
+//       price : 5388,
+//       size : '7 7+',
+//       buy : function () {
+//           console.log('买了一个'+this.title+'手机， 花了'+this.price+'钱， 型号是'+this.size);
+//       }
+//   });
+//
+//   //对象的方式操作DOM
+//   $('#title').html(ip7.title);
+//   $('#price').html(ip7.price);
+//   $('#size').html(ip7.size);
+//   $('#buy').on('click', function () {
+//       // 模拟买手机操作
+//       ip7.buy();
+//   });
+    var attr=[];
+   for (var i=0;i++;i<6){
+        attr[i]=arry[0];
+       $(div).get(i).bg.attr(attr[i].bg);
+       $(div).get(i).zhekou.html(attr[i].zhekou);
+       $(div).get(i).price.html(attr[i].price);
+       $(div).get(i).shouliang.html(attr[i].shouliang)
+   }
+</script>
+</body>
+</html>

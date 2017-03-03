@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="demo"></div>
+<!--template.js是一款js模板引擎， 提供一套模板， 非常方便的可以生成一段html代码， 非常好用， 而且可以传入数据-->
+<script src="./template.js"></script>
+<!--创建一个模板-->
+<!--text/html把script标签的type设置成这个， 那么可以在js里面写html标签-->
+<script id="template_id" type="text/html">
+    <strong style="color: red">title:{{title}}</strong><br/>
+    <strong style="color: red">leader:{{leader}}</strong><br/>
+    <strong style="color: red">daoyan:{{daoyan}}</strong><br/>
+</script>
+<script>
+    //json对象储存数据
+    var film = {
+        title : '星球大战',
+        leader : 'xdyuan',
+        daoyan : 'zhaoyuanjie'
+    };
+    //生成一些html代码  第一个参数是模板id， 第二个参数是数据
+    var html = template('template_id', film);
+    document.getElementById('demo').innerHTML = html;
+</script>
+</body>
+</html>

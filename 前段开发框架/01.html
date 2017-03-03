@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<div>
+    <h1 id="title"></h1>
+    <p id="price"></p>
+    <p id="size"></p>
+    <button id="buy">购买</button>
+</div>
+<script src="jquery-3.1.0.js"></script>
+<script>
+
+
+    function Product(option) {
+        this._init(option);
+    }
+    Product.prototype = {
+        _init : function (option) {
+            this.title = option.title;
+            this.price = option.price;
+            this.size = option.size;
+            this.buy = option.buy;
+        }
+    };
+
+
+    var ip7 = new Product({
+        title : 'iPhone7',
+        price : 5388,
+        size : '7 7+',
+        buy : function () {
+            console.log('买了一个'+this.title+'手机， 花了'+this.price+'钱， 型号是'+this.size);
+        }
+    });
+
+    //对象的方式操作DOM
+    $('#title').html(ip7.title);
+    $('#price').html(ip7.price);
+    $('#size').html(ip7.size);
+    $('#buy').on('click', function () {
+        // 模拟买手机操作
+        ip7.buy();
+    });
+
+</script>
+
+
+
+</body>
+</html>
